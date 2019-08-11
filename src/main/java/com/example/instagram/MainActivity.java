@@ -16,7 +16,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
-TextView User,Pass;
+TextView User,Pass,sign_in_text_view;
 Button btn_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ Button btn_login;
         User=findViewById(R.id.Username);
         Pass=findViewById(R.id.Password);
         btn_login=findViewById(R.id.Btn_login);
+        sign_in_text_view=findViewById(R.id.sign_in_text_view);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,15 @@ Button btn_login;
                 String U=User.getText().toString();
                 String P=Pass.getText().toString();
                 Login(U,P);
+            }
+        });
+
+
+        sign_in_text_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,sign_up.class));
+                finish();
             }
         });
        /* Handler h=new Handler();
@@ -54,6 +64,7 @@ Button btn_login;
                     return;
                 }
                 startActivity(new Intent(MainActivity.this,main_ig.class));
+                finish();
             }
         });
 
