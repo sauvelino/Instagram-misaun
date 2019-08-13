@@ -32,43 +32,38 @@ import java.util.List;
  */
 public class PlaceholderFragment extends Fragment {
 
-    private static final String ARG_SECTION_NUMBER = "section_number";
-
-    private PageViewModel pageViewModel;
+    //private static final String ARG_SECTION_NUMBER = "section_number";
     List<Post> list;
     RecyclerviewAdapter listAdapter;
-
+    RecyclerView recyclerView;
+/*
     public static PlaceholderFragment newInstance(int index) {
-        PlaceholderFragment fragment = new PlaceholderFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(ARG_SECTION_NUMBER, index);
-        fragment.setArguments(bundle);
+      //  PlaceholderFragment fragment = new PlaceholderFragment();
+      //  Bundle bundle = new Bundle();
+      //  bundle.putInt(ARG_SECTION_NUMBER, index);
+      //  fragment.setArguments(bundle);
         return fragment;
+    }*/
+
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main_ig, container,false);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
-        int index = 1;
-        if (getArguments() != null) {
-            index = getArguments().getInt(ARG_SECTION_NUMBER);
-        }
-        pageViewModel.setIndex(index);
-    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main_ig, container, false);
-        final RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView =view.findViewById(R.id.recyclerView);
         list=new ArrayList<Post>();
         listAdapter=new RecyclerviewAdapter(getActivity(),list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
-       recyclerView.setAdapter(listAdapter);
-       fetchAllPosts();
-        return root;
+        //Log.d("Error Fetch",listAdapter.toString());
+
+        recyclerView.setAdapter(listAdapter);
+        fetchAllPosts();
+
     }
 
     private void fetchAllPosts() {
@@ -83,6 +78,7 @@ public class PlaceholderFragment extends Fragment {
                     return;
                 }
             listAdapter.addAllToList(objects);
+                Log.d("dataaa",listAdapter.toString());
             }
         });
     }

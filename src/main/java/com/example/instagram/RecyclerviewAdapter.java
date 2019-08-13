@@ -41,9 +41,11 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         holder.user_caption.setText(p.getUser().getUsername());
         holder.description.setText(p.getDescription());
 
-        Glide.with(context).load(p.getImage().getUrl()).into(holder.imgpost);
-        Glide.with(context).load(p.getParseUser("user").getParseFile("profile").getUrl()).into(holder.img_profile);
-       // Log.d("mypictureprofile",p.getParseUser("user").getParseFile("profile").getUrl().toString());
+
+        Glide.with(context).load(p.getImage().getUrl()).placeholder(R.drawable.color_background).into(holder.imgpost);
+        //Glide.with(context).load(p.getImage().getUrl()).into(holder.imgpost);
+        Glide.with(context).load(p.getParseUser("user").getParseFile("profile").getUrl()).placeholder(R.drawable.color_background).into(holder.img_profile);
+        Log.d("mypictureprofile",p.getParseUser("user").getParseFile("profile").getUrl().toString());
     }
 
 
@@ -68,7 +70,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
         public ViewHOlder(@NonNull View itemView) {
             super(itemView);
-            img_profile=itemView.findViewById(R.id.img_profil);
+            img_profile=itemView.findViewById(R.id.img_profiles);
             imgpost=itemView.findViewById(R.id.img_post);
             username=itemView.findViewById(R.id.tv_username);
             description=itemView.findViewById(R.id.tv_caption);

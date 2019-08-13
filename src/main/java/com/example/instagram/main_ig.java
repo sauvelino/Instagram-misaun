@@ -1,6 +1,5 @@
 package com.example.instagram;
 
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,28 +9,20 @@ import com.example.instagram.ui.main.likes_figment_fragment;
 import com.example.instagram.ui.main.profil_fragment;
 import com.example.instagram.ui.main.searchess_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.example.instagram.ui.main.SectionsPagerAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -46,13 +37,15 @@ ImageView btn_camera;
         setContentView(R.layout.activity_main_ig);
 
         LoadFragment(new PlaceholderFragment());
+Log.d("erere",new PlaceholderFragment().toString());
 
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
+       // SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+//        ViewPager viewPager = findViewById(R.id.view_pager);
+        //viewPager.setAdapter(sectionsPagerAdapter);
         BottomNavigationView tabs = findViewById(R.id.tabs);
         tabs.setOnNavigationItemSelectedListener(this);
+        tabs.setSelectedItemId(R.id.home);
        // tabs.setupWithViewPager(viewPager);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,11 +79,16 @@ Querypost();
         });
     }
 
-    public  Boolean LoadFragment(Fragment fragment){
-        if(fragment!=null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.view_pager,fragment).commit();
+    public Boolean LoadFragment(Fragment fragment){
+        if(fragment != null){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.view_pager, fragment)
+                    .commit();
             return true;
-        }else {return false;}
+        }else {
+            return false;
+        }
     }
 
     private void Querypost() {
