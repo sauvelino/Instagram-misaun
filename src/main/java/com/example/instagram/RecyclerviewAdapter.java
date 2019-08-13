@@ -1,6 +1,7 @@
 package com.example.instagram;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,11 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         Post p=list.get(position);
         holder.username.setText(p.getUser().getUsername());
         holder.user_caption.setText(p.getUser().getUsername());
-        holder.imgpost.setImageResource(StaticData.imgpath[position]);
         holder.description.setText(p.getDescription());
 
         Glide.with(context).load(p.getImage().getUrl()).into(holder.imgpost);
+        Glide.with(context).load(p.getParseUser("user").getParseFile("profile").getUrl()).into(holder.img_profile);
+       // Log.d("mypictureprofile",p.getParseUser("user").getParseFile("profile").getUrl().toString());
     }
 
 
@@ -60,12 +62,13 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     //Define the viewholder
     public class ViewHOlder extends RecyclerView.ViewHolder{
 
-        public ImageView imgpost;
+        public ImageView imgpost,img_profile;
         public TextView username,description,user_caption;
 
 
         public ViewHOlder(@NonNull View itemView) {
             super(itemView);
+            img_profile=itemView.findViewById(R.id.img_profil);
             imgpost=itemView.findViewById(R.id.img_post);
             username=itemView.findViewById(R.id.tv_username);
             description=itemView.findViewById(R.id.tv_caption);

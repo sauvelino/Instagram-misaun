@@ -50,9 +50,9 @@ public class sign_up extends AppCompatActivity {
                     return;
 
                 }
-                if(pass==pass_confirm){
+                if(!pass.contentEquals(pass_confirm)){
                     Toast.makeText(sign_up.this, "password not match", Toast.LENGTH_SHORT).show();
-                    sign_up_Parse(user,email,pass);
+                    return;
                 }
 
                 sign_up_Parse(user,email,pass);

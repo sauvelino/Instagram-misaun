@@ -75,6 +75,7 @@ EditText editText;
                     return;
                 }
                 SavePost(descritpion,user,photoFile);
+                finish();
             }
         });
 
